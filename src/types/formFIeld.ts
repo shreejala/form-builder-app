@@ -15,6 +15,6 @@ export interface FormFieldUpdateType {
   placeholder?: string;
   options?: string[];
   formFieldType?: string;
-  formFieldName:string;
+  formFieldName?:string;
   radioOptions?: string[];
 }
