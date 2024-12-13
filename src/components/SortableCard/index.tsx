@@ -2,17 +2,12 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
-  KeyboardSensor,
   PointerSensor,
   useDroppable,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-} from "@dnd-kit/sortable";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 import { FormFieldType, FormFieldUpdateType } from "@/types/formFIeld";
 import ElementItem from "../ElementItem";
 import SortableItem from "../molecules/SortableItem";
@@ -40,12 +35,7 @@ const SortableCard = ({
     opacity: isOver ? 0.5 : 1,
   };
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+  const sensors = useSensors(useSensor(PointerSensor));
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -79,16 +69,17 @@ const SortableCard = ({
       <div className="flex flex-row justify-between items-center">
         <h3>Droppable Card</h3>
 
-        <FormButton title="Clear" variant="ghost" onClick={onClearClick} />
+        <FormButton title="Clear" onClick={onClearClick} />
       </div>
 
-      <div className="bg-[#2F2F2F] p-2 rounded-md flex flex-col items-center">
+      <div className="bg-[#2A2D31] p-2 rounded-md flex flex-col items-center">
         <div className=" w-[350px]  md:w-[450px]" style={style}>
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
-            autoScroll={{ threshold: { x: 5, y: 5 } }}
+            autoScroll={true}
+            // autoScroll={{ threshold: { x: 5, y: 5 } }}
           >
             <div className=" relative p-4 overflow-y-auto overflow-x-hidden max-h-[500px] scrollbar-thin flex flex-col gap-4">
               <SortableContext items={items}>

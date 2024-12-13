@@ -6,7 +6,7 @@ export const fields: FieldType[] = [
     label: "Label",
     type: "label",
     name: "Label",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "text-input",
@@ -15,7 +15,7 @@ export const fields: FieldType[] = [
     placeholder: "Text",
     type: "text",
     formFieldType: "text",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "password-input",
@@ -24,7 +24,7 @@ export const fields: FieldType[] = [
     type: "password",
     name: "Password Input",
     formFieldType: "password",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "select-input",
@@ -33,7 +33,7 @@ export const fields: FieldType[] = [
     type: "select",
     name: "Select Dropdown",
     formFieldType: "select",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "radio-input",
@@ -41,7 +41,7 @@ export const fields: FieldType[] = [
     type: "radio",
     name: "Radio Button",
     formFieldType: "radio",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "checkbox",
@@ -49,14 +49,14 @@ export const fields: FieldType[] = [
     type: "checkbox",
     name: "Checkbox",
     formFieldType: "checkbox",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
   {
     id: "button",
     label: "Button",
     type: "button",
     name: "button",
-    formFieldName: Date.now().toString(),
+    formFieldName: JSON.stringify(Date.now()),
   },
 ];
 

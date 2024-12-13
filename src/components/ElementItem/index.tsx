@@ -41,10 +41,12 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
     }
   };
 
+  const notEmpty = (val: string) => (val === "" ? " " : val.trim());
+
   return (
     <div
       key={item.id}
-      className="flex flex-col gap-2 p-4 rounded-md shadow-md bg-secondary-foreground"
+      className="flex flex-col gap-2 p-4 rounded-md shadow-md bg-black"
     >
       <div className="flex flex-row items-center justify-between">
         <span className=" font-bold">{item.name}</span>
@@ -53,7 +55,6 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
           className="text-white"
           title={"X"}
           size="icon"
-          variant="link"
           onClick={onRemoveField}
         />
       </div>
@@ -85,7 +86,6 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
               formFieldName: e.target.value,
             })
           }
-          className="bg-white  text-black border-black px-[4px] py-[2px] placeholder-gray-500"
         />
       </div>
 
@@ -116,11 +116,10 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
                 onChange={(e) =>
                   updateItem(item.id, {
                     options: item?.options?.map((opt, i) =>
-                      i === index ? e.target.value : opt
+                      i === index ? notEmpty(e.target.value) : opt
                     ),
                   })
                 }
-                className="bg-white  text-black border-black px-[4px] py-[2px] placeholder-gray-500"
                 placeholder={"Option"}
               />
 
@@ -163,11 +162,10 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
                 onChange={(e) =>
                   updateItem(item.id, {
                     radioOptions: item?.radioOptions?.map((opt, i) =>
-                      i === index ? e.target.value : opt
+                      i === index ? notEmpty(e.target.value) : opt
                     ),
                   })
                 }
-                className="bg-white  text-black border-black px-[4px] py-[2px] placeholder-gray-500"
                 placeholder={"Option"}
               />
 

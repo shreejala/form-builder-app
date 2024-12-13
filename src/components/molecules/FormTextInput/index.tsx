@@ -7,8 +7,8 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 const FormTextInput = ({
-  type="text",
-  placeholder="",
+  type = "text",
+  placeholder = "",
   label,
   error,
   ...props
@@ -23,14 +23,14 @@ const FormTextInput = ({
             type={type}
             placeholder={placeholder}
             onPointerDown={(e) => e.stopPropagation()}
-            className="text-black"
+            onKeyDown={(e)=> e.stopPropagation()}
+            className="bg-[#1E1F22] placeholder:text-[#86898C]"
             {...props}
-
           />
         </div>
       </div>
 
-      <div className="flex text-destructive">{error && <div>{error}</div>}</div>
+      <div className="flex text-red-500">{error && <div>{error}</div>}</div>
     </div>
   );
 };

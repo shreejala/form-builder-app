@@ -24,9 +24,9 @@ const Modal = ({
 }: ModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="bg-[#2A2D31] border-none">
         <DialogHeader>
-          <DialogTitle className="text-black">{title}</DialogTitle>
+          <DialogTitle className="">{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}

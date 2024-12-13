@@ -13,7 +13,7 @@ const createSchema = (fields: FieldConfig[]): ZodObject<any> => {
     let schema;
 
     if (field.type === "email") {
-      schema = z.string().min(1, { message: "Required" }).regex(emailRegexp, {
+      schema = z.string().min(1, { message: "Please enter your email address." }).regex(emailRegexp, {
         message: "The email address you provided is invalid.",
       });
     }
@@ -31,19 +31,19 @@ const createSchema = (fields: FieldConfig[]): ZodObject<any> => {
 
     if (field.type === "checkbox") {
       schema = z.boolean().refine((val) => val === true, {
-        message: "Please check the condition.",
+        message: "You are required to check this box.",
       });
     }
 
     if (field.type === "radio") {
       schema = z.string().refine((val) => val !== "", {
-        message: "Required.",
+        message: "Please select at least one option.",
       });
     }
 
     if (field.type === "select") {
       schema = z.string().refine((val) => val !== "", {
-        message: "Required",
+        message: "Please select an option.",
       });
     }
     schemaShape[field.name] = schema;

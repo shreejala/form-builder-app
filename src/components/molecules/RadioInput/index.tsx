@@ -18,7 +18,7 @@ const RadioInput = ({
 }: RadioInputProps) => {
   return (
     <div className="flex flex-1 flex-col">
-      <div className={`flex flex-col gap-2}`}>
+      <div className={`flex flex-col gap-2`}>
         {label && <div className="flex">{label}</div>}
 
         {/* <RadioGroup value={value} onValueChange={onChange} defaultValue={value}>
@@ -31,21 +31,23 @@ const RadioInput = ({
             );
           })}
         </RadioGroup> */}
-        {options?.map((opt, index) => (
-          <label key={index} className="flex items-center space-x-2">
-            <input
-              type="radio"
-              value={opt}
-              checked={value === opt}
-              onChange={() => onChange(opt)}
-              className="h-4 w-4 rounded-full border border-neutral-900 focus:ring-2 focus:ring-neutral-900"
-            />
-            <span>{opt}</span>
-          </label>
-        ))}
+        <div className="grid grid-cols-2 grid-rows-2 gap-1">
+          {options?.map((opt, index) => (
+            <label key={index} className="flex items-center space-x-2">
+              <input
+                type="radio"
+                value={opt}
+                checked={value === opt}
+                onChange={() => onChange(opt)}
+                className="h-4 w-4 rounded-full border border-neutral-900 focus:ring-2 focus:ring-neutral-900"
+              />
+              <span>{opt}</span>
+            </label>
+          ))}
+        </div>
       </div>
 
-      <div className="flex text-destructive">{error && <div>{error}</div>}</div>
+      <div className="flex text-red-500">{error && <div>{error}</div>}</div>
     </div>
   );
 };

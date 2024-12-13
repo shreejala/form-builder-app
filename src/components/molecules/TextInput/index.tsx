@@ -23,7 +23,7 @@ export function TextInput({
             type={type}
             placeholder={placeholder}
             onPointerDown={(e) => e.stopPropagation()}
-            className="bg-white  text-black border-black border-[1px] px-[4px] py-[2px] placeholder-gray-500"
+            // className=" placeholder-gray-600 border-0 focus:border-0"
             {...props}
           />
         </div>

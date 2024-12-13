@@ -135,30 +135,5 @@ button:focus-visible {
   }
 }
 
-@layer utilities {
-  .scrollbar-thin {
-    scrollbar-width: thin; /* Firefox */
-  }
-
-  .scrollbar {
-    scrollbar-width: auto;
-  }
-
-  .scrollbar::-webkit-scrollbar {
-    /* width: 8px; For thin scrollbar
-    height: 8px; */
-  }
-
-  .scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Scroll track color */
-  }
-
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: #888; /* Scroll thumb color */
-    border-radius: 4px; /* Rounded edges */
-  }
-
-  .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Hover effect */
-  }
-}
+::-webkit-scrollbar{width:3px;height:3px;border-left:1px solid #E6ECF8;}
+::-webkit-scrollbar-thumb{background-color:#7987a1;}

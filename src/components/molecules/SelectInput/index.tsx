@@ -25,11 +25,11 @@ const SelectInput = ({
 }: SelectInputProps) => {
   return (
     <div className="flex flex-1 flex-col">
-      <div className={`flex flex-col gap-2}`}>
+      <div className={`flex flex-col gap-2`}>
         {label && <div className="flex">{label}</div>}
 
-        <Select onValueChange={handleChange} defaultValue={value}>
-          <SelectTrigger className="text-black">
+        <Select value={value} onValueChange={handleChange} defaultValue={value}>
+          <SelectTrigger>
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
           <SelectContent>
@@ -44,7 +44,7 @@ const SelectInput = ({
         </Select>
       </div>
 
-      <div className="flex text-destructive">{error && <div>{error}</div>}</div>
+      <div className="flex text-red-500">{error && <div>{error}</div>}</div>
     </div>
   );
 };

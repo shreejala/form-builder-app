@@ -24,7 +24,7 @@ const FormCheckBox = ({
         <div>{text}</div>
       </div>
 
-      <div className="flex text-destructive">{error && <div>{error}</div>}</div>
+      <div className="flex text-red-500">{error && <div>{error}</div>}</div>
     </div>
   );
 };

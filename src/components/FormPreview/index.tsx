@@ -47,12 +47,13 @@ const FormPreview = ({ items }: FormPreviewProps) => {
     console.log("Data", data);
     setSuccessMsg("Successfully validated !!");
   };
-  
+
+  console.log("Dsfg", items)
   return (
     <div className="flex flex-col gap-2">
       <h3>Form Preview</h3>
 
-      <div className=" rounded-md p-5 flex flex-col gap-5 cursor w-[350px]  md:w-[450px] bg-[#2F2F2F] ">
+      <div className=" rounded-md p-5 flex flex-col gap-5 cursor w-[350px] mt-4 md:w-[500px] bg-[#2A2D31] ">
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)}>
             {items.map((item) => (
@@ -145,7 +146,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                     render={({ field: { value, onChange } }) => (
                       <FormCheckBox
                         text={item.label}
-                        value={value}
+                        value={typeof value === "boolean" ? value : false}
                         onChange={onChange}
                         error={errors?.[
                           item.formFieldName
@@ -166,7 +167,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
           </form>
         </Form>
 
-        <div className=" text-green-600">{successMsgm}</div>
+        {successMsgm && <div className=" text-green-600">{successMsgm}</div>}
       </div>
     </div>
   );
