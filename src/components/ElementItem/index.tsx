@@ -41,7 +41,15 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
     }
   };
 
-  const notEmpty = (val: string) => (val === "" ? " " : val.trim());
+  const conditionalTrim = (val: string) => {
+    if (val.trim() === "") {
+      return val;
+    } else {
+      return val.trim();
+    }
+  };
+
+  const notEmpty = (val: string) => (val === "" ? " " : conditionalTrim(val));
 
   return (
     <div
