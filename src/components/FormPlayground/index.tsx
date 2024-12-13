@@ -20,7 +20,6 @@ import {
   LocalStorageItems,
 } from "@/helpers/commonHelper";
 import { appName } from "@/constants/app";
-import { getActiveResourcesInfo } from "process";
 
 const FormPlayground = () => {
   const [items, setItems] = useState<FormFieldType[]>([]);
@@ -96,7 +95,7 @@ const FormPlayground = () => {
       localStorage.setItem(`${appName}_${template}`, JSON.stringify(items));
       setTemplate("");
       setIsSaved(false);
-      getActiveResourcesInfo()
+      getAllLocalStorageItemsAsJSON()
     }
   };
 
