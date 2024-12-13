@@ -7,6 +7,8 @@ import SelectInput from "./SelectInput";
 import FormButton from "./FormButton";
 import FormCheckBox from "./FormCheckBox";
 import RadioInput from "./RadioInput";
+import Modal from "./Modal";
+import { TextInput } from "./TextInput";
 
 export {
   Draggable,
@@ -18,4 +20,6 @@ export {
   FormButton,
   FormCheckBox,
   RadioInput,
+  Modal,
+  TextInput
 };

@@ -5,8 +5,8 @@ import {
   FormTextInput,
   RadioInput,
   SelectInput,
-} from "../atoms";
-import Label from "../atoms/LabelText";
+} from "../molecules";
+import Label from "../molecules/LabelText";
 import { Form, FormField } from "../ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
     .map((itm) => {
       return {
         type: itm?.formFieldType || "text",
-        name: itm?.formFieldName,
+        name: itm.formFieldName,
       };
     });
 
@@ -47,12 +47,12 @@ const FormPreview = ({ items }: FormPreviewProps) => {
     console.log("Data", data);
     setSuccessMsg("Successfully validated !!");
   };
-
+  
   return (
-    <div className="flex flex-col gap-2 ml-5">
+    <div className="flex flex-col gap-2">
       <h3>Form Preview</h3>
 
-      <div className=" rounded-md p-5 flex flex-col gap-5 cursor w-[450px] bg-[#2F2F2F] ">
+      <div className=" rounded-md p-5 flex flex-col gap-5 cursor w-[350px]  md:w-[450px] bg-[#2F2F2F] ">
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)}>
             {items.map((item) => (
@@ -76,6 +76,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                         ]?.message?.toString()}
                       />
                     )}
+                    defaultValue=""
                   />
                 )}
 
@@ -94,6 +95,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                         ]?.message?.toString()}
                       />
                     )}
+                    defaultValue=""
                   />
                 )}
 
@@ -113,6 +115,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                         placeholder={item.label || ""}
                       />
                     )}
+                    defaultValue=""
                   />
                 )}
 
@@ -131,6 +134,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                         ]?.message?.toString()}
                       />
                     )}
+                    defaultValue=""
                   />
                 )}
 
@@ -148,6 +152,7 @@ const FormPreview = ({ items }: FormPreviewProps) => {
                         ]?.message?.toString()}
                       />
                     )}
+                    defaultValue={false}
                   />
                 )}
 

@@ -1,6 +1,6 @@
 import { FormFieldType, FormFieldUpdateType } from "@/types/formFIeld";
-import { TextInput } from "../atoms/TextInput";
-import { FormButton, IconButton, SelectInput } from "../atoms";
+import { TextInput } from "../molecules/TextInput";
+import { FormButton, IconButton, SelectInput } from "../molecules";
 import { Plus, X } from "lucide-react";
 import { inputType } from "@/constants/fields";
 
@@ -96,7 +96,6 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
 
             <IconButton
               onClick={() => {
-                console.log("clicked");
                 updateItem(item.id, {
                   options: [...(item?.options || []), "New Option"],
                 });
@@ -109,7 +108,7 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
           {item?.options?.map((option, index) => (
             <div
               key={index}
-              className="flex flex-row justify-between items-center gap-3"
+              className="flex flex-row justify-between items-center gap-3 mt-2"
             >
               <TextInput
                 type="text"
@@ -156,7 +155,7 @@ const ElementItem = ({ item, updateItem, onRemoveField }: ElementItemProps) => {
           {item?.radioOptions?.map((option, index) => (
             <div
               key={index}
-              className="flex flex-row justify-between items-center gap-3"
+              className="flex flex-row justify-between items-center gap-3 mt-2"
             >
               <TextInput
                 type="text"

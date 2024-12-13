@@ -1,13 +1,13 @@
 import { Input } from "@/components/ui/input";
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: string;
+  type?: string;
   placeholder: string;
   label?: string;
   error?: string;
 }
 export function TextInput({
-  type,
+  type = "text",
   placeholder,
   label,
   error,
@@ -23,6 +23,7 @@ export function TextInput({
             type={type}
             placeholder={placeholder}
             onPointerDown={(e) => e.stopPropagation()}
+            className="bg-white  text-black border-black border-[1px] px-[4px] py-[2px] placeholder-gray-500"
             {...props}
           />
         </div>

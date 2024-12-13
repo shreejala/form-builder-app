@@ -15,19 +15,23 @@ import {
 } from "@dnd-kit/sortable";
 import { FormFieldType, FormFieldUpdateType } from "@/types/formFIeld";
 import ElementItem from "../ElementItem";
-import SortableItem from "../atoms/SortableItem";
-import { FormButton } from "../atoms";
+import SortableItem from "../molecules/SortableItem";
+import { FormButton } from "../molecules";
 
 interface SortableCardProps {
   items: FormFieldType[];
   setItems: React.Dispatch<React.SetStateAction<FormFieldType[]>>;
-  onSaveClicked: () => void;
+  onSaveClick: () => void;
+  onClearClick: () => void;
+  onPreviewClick: () => void;
 }
 
 const SortableCard = ({
   items,
   setItems,
-  onSaveClicked,
+  onSaveClick,
+  onClearClick,
+  onPreviewClick,
 }: SortableCardProps) => {
   const { setNodeRef, isOver } = useDroppable({ id: "droppable-area" });
 
@@ -69,13 +73,17 @@ const SortableCard = ({
       setItems(prevItems);
     }
   };
-  
+
   return (
-    <div ref={setNodeRef} className="flex flex-col gap-2">
-      <h3>Droppable Card</h3>
+    <div ref={setNodeRef} className="flex flex-col gap-2 md:ml-4">
+      <div className="flex flex-row justify-between items-center">
+        <h3>Droppable Card</h3>
+
+        <FormButton title="Clear" variant="ghost" onClick={onClearClick} />
+      </div>
 
       <div className="bg-[#2F2F2F] p-2 rounded-md flex flex-col items-center">
-        <div className="  w-[450px]" style={style}>
+        <div className=" w-[350px]  md:w-[450px]" style={style}>
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -102,7 +110,15 @@ const SortableCard = ({
           </DndContext>
         </div>
 
-        <FormButton className="m-2" title="Save" onClick={onSaveClicked} />
+        <div>
+          <FormButton
+            className="m-2"
+            title="Preview"
+            onClick={onPreviewClick}
+          />
+
+          <FormButton className="m-2" title="Save" onClick={onSaveClick} />
+        </div>
       </div>
     </div>
   );

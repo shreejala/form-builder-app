@@ -1,6 +1,6 @@
 import { FieldType } from "@/types/field";
 import { DragOverlay } from "@dnd-kit/core";
-import { Draggable } from "../atoms";
+import { Draggable } from "../molecules";
 import FieldItem from "../FieldItem";
 
 interface FieldOptionProps {
@@ -9,12 +9,11 @@ interface FieldOptionProps {
 }
 
 const FieldOptionBar = ({ fields, activeId }: FieldOptionProps) => {
-
   return (
     <div className="flex flex-col gap-2">
-      <h3>Draggable Field Options</h3>
+      <h3 className="mt-2">Draggable Field Options</h3>
 
-      <div className=" p-5 flex flex-col gap-5 w-[200px]">
+      <div className=" p-4 flex flex-col gap-5 w-[200px]">
         {fields.map((field: FieldType, index) => {
           return (
             <Draggable key={index} id={field.id} field={field}>

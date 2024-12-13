@@ -8,15 +8,28 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FieldOptionBar from "../FieldOptionBar";
 import SortableCard from "../SortableCard";
 import { fields } from "@/constants/fields";
 import FormPreview from "../FormPreview";
+import { FormButton, Modal, TextInput } from "../molecules";
+import {
+  getAllLocalStorageItemsAsJSON,
+  getSanitizedName,
+  LocalStorageItems,
+} from "@/helpers/commonHelper";
+import { appName } from "@/constants/app";
 
 const FormPlayground = () => {
   const [items, setItems] = useState<FormFieldType[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [isPreview, setIsPreview] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [template, setTemplate] = useState("");
+  const [templates, setTemplates] = useState<LocalStorageItems<object | null>>(
+    {}
+  );
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -24,6 +37,15 @@ const FormPlayground = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  const getSavedTemplates = () => {
+    const data = getAllLocalStorageItemsAsJSON();
+    setTemplates(data);
+  };
+
+  useEffect(() => {
+    getSavedTemplates();
+  }, []);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -50,25 +72,102 @@ const FormPlayground = () => {
     setActiveId(event?.active?.data?.current?.name || null);
   };
 
-  const handleSaveClicked = () => {};
+  const handleSaveClicked = () => {
+    if (items.length) {
+      setIsSaved(true);
+    }
+  };
+
+  const handleClearClick = () => {
+    setItems([]);
+    setIsPreview(false);
+    setTemplate("");
+  };
+
+  const handlePreviewClick = () => {
+    if (items.length) {
+      setIsPreview(true);
+    }
+  };
+
+  const handleConfirmClick = () => {
+    if (template !== "") {
+      localStorage.setItem(`${appName}_${template}`, JSON.stringify(items));
+      setTemplate("");
+      setIsSaved(false);
+    }
+  };
+
+  const handleTemplateClick = (key: string) => {
+    setItems(templates[key] as FormFieldType[]);
+    setIsPreview(true)
+  };
+
+  const renderTemplates = () => {
+    const keys: string[] = Object.keys(templates);
+    return (
+      <div>
+        <h3>Saved Templates</h3>
+        {keys.map((key, index) => (
+          <div key={index}>
+            <button
+              className="bg-transparent text-slate-400"
+              onClick={() => handleTemplateClick(key)}
+            >
+              {getSanitizedName(key || "")}
+            </button>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className="flex flex-row gap-2 justify-between flex-wrap">
-      <DndContext
-        sensors={sensors}
-        onDragEnd={handleDragEnd}
-        onDragStart={handleDragStart}
-      >
-        <FieldOptionBar fields={fields} activeId={activeId} />
+    <div className="flex flex-col gap-4">
+      {renderTemplates()}
 
-        <SortableCard
-          items={items}
-          setItems={setItems}
-          onSaveClicked={handleSaveClicked}
-        />
-      </DndContext>
+      <div className="flex flex-row justify-start md:justify-between gap-2 flex-wrap">
+        <div className="flex flex-row flex-wrap">
+          <DndContext
+            sensors={sensors}
+            onDragEnd={handleDragEnd}
+            onDragStart={handleDragStart}
+          >
+            <FieldOptionBar fields={fields} activeId={activeId} />
 
-      <FormPreview items={items} />
+            <SortableCard
+              items={items}
+              setItems={setItems}
+              onSaveClick={handleSaveClicked}
+              onClearClick={handleClearClick}
+              onPreviewClick={handlePreviewClick}
+            />
+          </DndContext>
+        </div>
+
+        <div className="mt-4">{isPreview && <FormPreview items={items} />}</div>
+
+        <Modal
+          open={isSaved}
+          onOpenChange={setIsSaved}
+          title="Save as tremplate?"
+        >
+          <TextInput
+            value={template}
+            onChange={(e) => setTemplate(e.target.value)}
+            placeholder="Template Name"
+            className="mt-2 text-black"
+          />
+
+          <div className="flex justify-center">
+            <FormButton
+              title="Confirm"
+              variant="ghost"
+              onClick={handleConfirmClick}
+            />
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 };

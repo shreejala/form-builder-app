@@ -1,13 +1,13 @@
 import { Input } from "@/components/ui/input";
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: string;
+  type?: string;
   placeholder?: string;
   label?: string;
   error?: string;
 }
 const FormTextInput = ({
-  type,
+  type="text",
   placeholder="",
   label,
   error,
@@ -22,9 +22,10 @@ const FormTextInput = ({
           <Input
             type={type}
             placeholder={placeholder}
-            {...props}
             onPointerDown={(e) => e.stopPropagation()}
             className="text-black"
+            {...props}
+
           />
         </div>
       </div>
