@@ -20,6 +20,7 @@ import {
   LocalStorageItems,
 } from "@/helpers/commonHelper";
 import { appName } from "@/constants/app";
+import { getActiveResourcesInfo } from "process";
 
 const FormPlayground = () => {
   const [items, setItems] = useState<FormFieldType[]>([]);
@@ -95,12 +96,13 @@ const FormPlayground = () => {
       localStorage.setItem(`${appName}_${template}`, JSON.stringify(items));
       setTemplate("");
       setIsSaved(false);
+      getActiveResourcesInfo()
     }
   };
 
   const handleTemplateClick = (key: string) => {
     setItems(templates[key] as FormFieldType[]);
-    setIsPreview(true)
+    setIsPreview(true);
   };
 
   const renderTemplates = () => {
@@ -124,7 +126,7 @@ const FormPlayground = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      {renderTemplates()}
+      {templates && renderTemplates()}
 
       <div className="flex flex-row justify-start md:justify-between gap-2 flex-wrap">
         <div className="flex flex-row flex-wrap">
