@@ -1,0 +1,1 @@
+export const appName = "form_builder_app"
